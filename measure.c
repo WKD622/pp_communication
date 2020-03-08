@@ -27,10 +27,10 @@ double byte_to_mega_bits(int number_of_elements)
   return ((double)number_of_elements) * 8 / 1000000;
 }
 
-double mega_bits_per_seconds(double mega_bits, double seconds)
+double mega_bits_per_seconds(double mega_bits, long double seconds)
 {
-  printf("%f\n", seconds);
-  return mega_bits * 1.0 / seconds;
+  printf("%lf\n", seconds);
+  return double((long double)mega_bits * 1.0 / seconds);
 }
 
 int main(int argc, char **argv)
@@ -71,7 +71,7 @@ int main(int argc, char **argv)
       gettimeofday(&tval_after, NULL);
       timersub(&tval_after, &tval_before, &tval_result);
 
-      long double time_passed_in_seconds = (double)tval_result.tv_sec + (double)tval_result.tv_usec / 1000000;
+      long double time_passed_in_seconds = (long double)tval_result.tv_sec + (long double)tval_result.tv_usec / 1000000;
       double speed = mega_bits_per_seconds(byte_to_mega_bits(data_size), time_passed_in_seconds);
       printf("%d) Speed: %f Mb/s\n", j, speed);
       if (j == 1)
