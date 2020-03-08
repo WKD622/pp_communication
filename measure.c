@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
     double time_passed_in_seconds = (double)tval_result.tv_sec + (double)tval_result.tv_usec / 1000000;
     printf("Time passed: %f\n", time_passed_in_seconds);
     printf("Process 0 received number %d from process 1\n", number);
-    printf("%f Mb/s", mega_bits_per_seconds(data_size, time_passed_in_seconds));
+    printf("%f Mb/s", mega_bits_per_seconds(byte_to_mega_bits(data_size), time_passed_in_seconds));
 
 } else if (world_rank == 1) {
     MPI_Barrier(MPI_COMM_WORLD);
