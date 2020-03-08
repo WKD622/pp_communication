@@ -100,7 +100,7 @@ int main(int argc, char **argv)
     free(received_data);
     if (world_rank == 0)
     {
-      printf("data_size: %f B\n", data_size);
+      printf("data_size: %d B\n", data_size);
       printf("average: %f Mb/s\n", average_speed);
     }
   }
