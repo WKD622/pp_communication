@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
   int number;
   if (world_rank == 0) {
     MPI_Barrier(MPI_COMM_WORLD);
-    
+
     number = -1;
 
     struct timeval tval_before, tval_after, tval_result;
@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
 
     printf("Time elapsed: %ld.%06ld\n", (long int)tval_result.tv_sec, (long int)tval_result.tv_usec);
     printf("Process 0 received number %d from process 1\n", number);
-    printf("%f Mb/s", mega_bits_per_seconds(data_size));
+    // printf("%f Mb/s", mega_bits_per_seconds(data_size, ));
 
 } else if (world_rank == 1) {
     MPI_Barrier(MPI_COMM_WORLD);
