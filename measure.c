@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
   int world_size;
   MPI_Comm_size(MPI_COMM_WORLD, &world_size);
 
-  long int data_size = 100000;
+  long int data_size = 10000000;
   int *data = malloc(data_size * sizeof(int));
   initialize_table(data, data_size);
 
