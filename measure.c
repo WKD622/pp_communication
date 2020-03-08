@@ -28,8 +28,9 @@ double byte_to_mega_bits(int number_of_elements)
 }
 
 double mega_bits_per_seconds(double mega_bits, long double seconds)
-{ 
-  if (seconds == 0.0){
+{
+  if (seconds == 0.0)
+  {
     seconds = 0.000001;
   }
   return (double)((long double)mega_bits * 1.0 / seconds);
@@ -97,7 +98,10 @@ int main(int argc, char **argv)
   }
   free(data);
   free(received_data);
-  printf("average: %f\n", average_speed);
+  if (world_rank == 0)
+  {
+    printf("average: %f\n", average_speed);
+  }
   MPI_Finalize();
   return 0;
 }
