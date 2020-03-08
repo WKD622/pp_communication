@@ -71,7 +71,7 @@ int main(int argc, char **argv)
 
       double time_passed_in_seconds = (double)tval_result.tv_sec + (double)tval_result.tv_usec / 1000000;
       double speed = mega_bits_per_seconds(byte_to_mega_bits(data_size), time_passed_in_seconds);
-      printf("Speed: %f Mb/s\n", speed);
+      // printf("Speed: %f Mb/s\n", speed);
       if (j == 1){
         average_speed = speed;
       } else {
@@ -85,7 +85,7 @@ int main(int argc, char **argv)
       int *received_data = malloc(data_size * sizeof(int));
       int response_number = 2;
       MPI_Recv(received_data, data_size, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-      printf("Process 1 received array.\n");
+      // printf("Process 1 received array.\n");
       MPI_Send(&response_number, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
     }
   }
