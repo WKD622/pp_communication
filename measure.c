@@ -57,7 +57,7 @@ int main(int argc, char** argv) {
     gettimeofday(&tval_after, NULL);
     timersub(&tval_after, &tval_before, &tval_result);
 
-    double time_passed_in_seconds = (double)tval_result.tv_sec + (double)tval_result.tv_usec / 1000000
+    double time_passed_in_seconds = (double)tval_result.tv_sec + (double)tval_result.tv_usec / 1000000;
     printf("Time elapsed: %ld.%06ld\n", (long int)tval_result.tv_sec, (long int)tval_result.tv_usec);
     printf("%f\n", time_passed_in_seconds);
     printf("Process 0 received number %d from process 1\n", number);
