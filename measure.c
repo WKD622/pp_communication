@@ -76,6 +76,7 @@ int main(int argc, char **argv)
       if (j == 1)
       {
         average_speed = speed;
+        printf('average: %f', average_speed);
       }
       else
       {
@@ -94,6 +95,5 @@ int main(int argc, char **argv)
   free(data);
   free(received_data);
   MPI_Finalize();
-  // printf('average: %f', average_speed);
   return 0;
 }
