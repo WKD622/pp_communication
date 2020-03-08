@@ -44,7 +44,7 @@ int main(int argc, char **argv)
   int *data = malloc(data_size * sizeof(int));
   int *received_data = malloc(data_size * sizeof(int));
   initialize_table(data, data_size);
-  int number_of_attempts = 1000000;
+  int number_of_attempts = 100;
   double average_speed = 0.0;
   int j;
   for (j = 0; j < number_of_attempts; j++)
@@ -70,7 +70,7 @@ int main(int argc, char **argv)
       gettimeofday(&tval_after, NULL);
       timersub(&tval_after, &tval_before, &tval_result);
 
-      double time_passed_in_seconds = (double)tval_result.tv_sec + (double)tval_result.tv_usec / 1000000;
+      long double time_passed_in_seconds = (double)tval_result.tv_sec + (double)tval_result.tv_usec / 1000000;
       double speed = mega_bits_per_seconds(byte_to_mega_bits(data_size), time_passed_in_seconds);
       printf("%d) Speed: %f Mb/s\n", j, speed);
       if (j == 1)
