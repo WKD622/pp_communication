@@ -44,7 +44,7 @@ int main(int argc, char **argv)
   int *data = malloc(data_size * sizeof(int));
   initialize_table(data, data_size);
   int number_of_attempts = 1000;
-  int average_speed = 0
+  int average_speed = 0;
   int j;
   for (j = 0; j < number_of_attempts; j++)
   {
