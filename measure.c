@@ -29,7 +29,7 @@ double byte_to_mega_bits(int number_of_elements)
 
 double mega_bits_per_seconds(double mega_bits, long double seconds)
 {
-  printf("%ld\n", seconds)
+  printf("%ld\n", seconds);
   return mega_bits * 1.0 / seconds;
 }
 
