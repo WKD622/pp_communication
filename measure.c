@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
     timersub(&tval_after, &tval_before, &tval_result);
 
     double time_passed_in_seconds = (double)tval_result.tv_sec + (double)tval_result.tv_usec / 1000000;
-    printf("%f Mb/s\n", mega_bits_per_seconds(byte_to_mega_bits(data_size), time_passed_in_seconds));
+    printf("Speed: %f Mb/s\n", mega_bits_per_seconds(byte_to_mega_bits(data_size), time_passed_in_seconds));
 
 } else if (world_rank == 1) {
     MPI_Barrier(MPI_COMM_WORLD);
