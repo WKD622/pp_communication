@@ -44,11 +44,11 @@ int main(int argc, char **argv)
   int world_size;
   MPI_Comm_size(MPI_COMM_WORLD, &world_size);
 
-  long int data_size = 10;
+  long int data_size = 1000000;
   int *data = malloc(data_size * sizeof(int));
   int *received_data = malloc(data_size * sizeof(int));
   initialize_table(data, data_size);
-  int number_of_attempts = 10000;
+  int number_of_attempts = 100000;
   double average_speed = 0.0;
   int j;
   for (j = 0; j < number_of_attempts; j++)
