@@ -19,7 +19,7 @@ void print_table(int *t, int number_of_elements){
 }
 
 double byte_to_mega_bits(int number_of_elements){
-  return ((double)number_of_elements) * 8 / 1000;
+  return ((double)number_of_elements) * 8 / 1000000;
 }
 
 double mega_bits_per_seconds(double mega_bits, double seconds){
