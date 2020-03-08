@@ -90,6 +90,6 @@ int main(int argc, char **argv)
     }
   }
   MPI_Finalize();
-  printf('average: %f', average_speed)
+  printf('average: %f', average_speed);
   return 0;
 }
