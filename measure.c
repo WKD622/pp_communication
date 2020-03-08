@@ -58,9 +58,6 @@ int main(int argc, char** argv) {
     timersub(&tval_after, &tval_before, &tval_result);
 
     double time_passed_in_seconds = (double)tval_result.tv_sec + (double)tval_result.tv_usec / 1000000;
-    printf("Time passed: %f\n", time_passed_in_seconds);
-    printf("Process 0 received number %d from process 1\n", number);
-    printf("%f Mb\n", byte_to_mega_bits(data_size));
     printf("%f Mb/s\n", mega_bits_per_seconds(byte_to_mega_bits(data_size), time_passed_in_seconds));
 
 } else if (world_rank == 1) {
@@ -68,7 +65,7 @@ int main(int argc, char** argv) {
     int *received_data = malloc(data_size * sizeof(int));
     int response_number = 2;
     MPI_Recv(received_data, data_size, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-    printf("Process 1 received array:\n");
+    printf("Process 1 received array.\n");
     MPI_Send(&response_number, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
 
 }
