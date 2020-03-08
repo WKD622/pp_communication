@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
     gettimeofday(&tval_after, NULL);
     timersub(&tval_after, &tval_before, &tval_result);
 
-    printf("Time elapsed: %ld.%06ld\n", (long int)tval_result.tv_sec, (long int)tval_result.tv_usec);
+    printf("%ld.%06ld\n", (long int)tval_result.tv_sec, (long int)tval_result.tv_usec);
 } else if (world_rank == 1) {
     MPI_Barrier(MPI_COMM_WORLD);
 
