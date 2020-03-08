@@ -73,9 +73,12 @@ int main(int argc, char **argv)
       double time_passed_in_seconds = (double)tval_result.tv_sec + (double)tval_result.tv_usec / 1000000;
       double speed = mega_bits_per_seconds(byte_to_mega_bits(data_size), time_passed_in_seconds);
       printf("%d) Speed: %f Mb/s\n", j, speed);
-      if (j == 1){
+      if (j == 1)
+      {
         average_speed = speed;
-      } else {
+      }
+      else
+      {
         average_speed = average_speed - average_speed / (double)j;
         average_speed = average_speed + speed / (double)j;
       }
@@ -88,6 +91,8 @@ int main(int argc, char **argv)
       MPI_Send(&response_number, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
     }
   }
+  free(data);
+  free(received_data);
   MPI_Finalize();
   // printf('average: %f', average_speed);
   return 0;
