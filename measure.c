@@ -69,7 +69,7 @@ int main(int argc, char** argv) {
     printf("Process 1 received:\n");
     print_table(received_data, data_size);
 
-    MPI_Send(&number, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
+    MPI_Send(4, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
 
 }
   MPI_Finalize();
