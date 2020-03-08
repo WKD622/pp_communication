@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
   MPI_Comm_size(MPI_COMM_WORLD, &world_size);
 
   long int data_size = 100000;
-  int *data = malloc(data_size * sizeof(int));
+  int data[data_size];
   initialize_table(data, data_size);
 
   // We are assuming at least 2 processes for this task
@@ -64,7 +64,7 @@ int main(int argc, char** argv) {
 
 } else if (world_rank == 1) {
     MPI_Barrier(MPI_COMM_WORLD);
-    int *received_data = malloc(data_size * sizeof(int));
+    int received_data[data_size];
     int response_number = 2;
     MPI_Recv(&received_data, data_size, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
     printf("Process 1 received:\n");
