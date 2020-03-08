@@ -79,7 +79,7 @@ int main(int argc, char **argv)
       }
       else
       {
-        printf("%f", speed);
+        printf("%f\n", speed);
         average_speed = average_speed - average_speed / (double)j;
         average_speed = average_speed + speed / (double)j;
       }
