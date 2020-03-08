@@ -73,10 +73,10 @@ int main(int argc, char **argv)
       double speed = mega_bits_per_seconds(byte_to_mega_bits(data_size), time_passed_in_seconds);
       printf("Speed: %f Mb/s\n", speed);
       if (j == 1){
-        average_speed = speed
+        average_speed = speed;
       } else {
-        average_speed = average_speed - average_speed / (double)j
-        average_speed = average_speed + speed / (double)j
+        average_speed = average_speed - average_speed / (double)j;
+        average_speed = average_speed + speed / (double)j;
       }
     }
     else if (world_rank == 1)
