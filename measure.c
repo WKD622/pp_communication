@@ -23,7 +23,7 @@ double byte_to_mega_bits(int number_of_elements){
 }
 
 double mega_bits_per_seconds(double mega_bits, double seconds){
-  return mega_bits * 1.0/seconds;
+  return mega_bits / 1.0/seconds;
 }
 
 int main(int argc, char** argv) {
