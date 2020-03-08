@@ -18,6 +18,14 @@ void print_table(int *t, int number_of_elements){
   }
 }
 
+double byte_to_mega_bits(int number_of_elements){
+  return ((double)number_of_elements) * 8 / 1000;
+}
+
+double mega_bits_per_seconds(double mega_bits, double seconds){
+  return mega_bits * 1.0/seconds;
+}
+
 int main(int argc, char** argv) {
   MPI_Init(NULL, NULL);
   int world_rank;
@@ -28,9 +36,6 @@ int main(int argc, char** argv) {
   int data_size = 10;
   int data[data_size];
   initialize_table(data, data_size);
-
-  printf("!%i!", sizeof(data_size));
-
 
   // We are assuming at least 2 processes for this task
   if (world_size < 2) {
@@ -58,7 +63,6 @@ int main(int argc, char** argv) {
 
     printf("Time elapsed: %ld.%06ld\n", (long int)tval_result.tv_sec, (long int)tval_result.tv_usec);
     printf("Process 0 received number %d from process 1\n", number);
-
 
 } else if (world_rank == 1) {
     MPI_Barrier(MPI_COMM_WORLD);
