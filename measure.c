@@ -74,12 +74,10 @@ int main(int argc, char **argv)
 
       long double time_passed_in_seconds = (long double)tval_result.tv_sec + (long double)tval_result.tv_usec / 1000000;
       double speed = mega_bits_per_seconds(byte_to_mega_bits(data_size), time_passed_in_seconds);
-      printf("%d) Speed: %f Mb/s\n", j, speed);
+      // printf("%d) Speed: %f Mb/s\n", j, speed);
       if (j == 1)
       {
-        printf("average: %f\n", average_speed);
         average_speed = speed;
-        printf("average: %f\n", average_speed);
       }
       else
       {
