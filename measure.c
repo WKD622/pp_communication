@@ -44,7 +44,7 @@ int main(int argc, char **argv)
   int *data = malloc(data_size * sizeof(int));
   int *received_data = malloc(data_size * sizeof(int));
   initialize_table(data, data_size);
-  int number_of_attempts = 10;
+  int number_of_attempts = 10000;
   double average_speed = 0.0;
   int j;
   for (j = 0; j < number_of_attempts; j++)
