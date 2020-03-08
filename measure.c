@@ -29,6 +29,8 @@ int main(int argc, char** argv) {
   int data[data_size];
   initialize_table(data, data_size);
 
+  printf("%i", sizeof(data_size))
+  
   // We are assuming at least 2 processes for this task
   if (world_size < 2) {
     fprintf(stderr, "World size must be greater than 1 for %s\n", argv[0]);
