@@ -95,7 +95,7 @@ int main(int argc, char **argv)
   }
   free(data);
   free(received_data);
-  if (world_rank == 0)
+  if (world_rank == 1)
   {
     printf("average: %f\n", average_speed);
   }
