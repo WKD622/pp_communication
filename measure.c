@@ -93,7 +93,10 @@ int main(int argc, char **argv)
   }
   free(data);
   free(received_data);
-  printf("average: %f", average_speed);
+  if (world_rank == 0)
+  {
+    printf("average: %f\n", average_speeśd);
+  }
   MPI_Finalize();
   return 0;
 }
