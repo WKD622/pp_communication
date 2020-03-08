@@ -4,12 +4,23 @@
 #include <time.h>
 #include <sys/time.h>
 
+int initialize_table(&t, number_of_elements){
+  int i;
+  for (i = 0; i < number_of_elements; i++){
+      t[i] = i
+  }
+}
+
 int main(int argc, char** argv) {
   MPI_Init(NULL, NULL);
   int world_rank;
   MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
   int world_size;
   MPI_Comm_size(MPI_COMM_WORLD, &world_size);
+
+  int data_size = 10;
+  int data[data_size];
+  initialize_table(data, data_size);
 
   // We are assuming at least 2 processes for this task
   if (world_size < 2) {
@@ -27,7 +38,7 @@ int main(int argc, char** argv) {
 
     gettimeofday(&tval_before, NULL);
 
-// Some code you want to time, for example:
+    // Some code you want to time, for example:
     MPI_Send(&number, 1, MPI_INT, 1, 0, MPI_COMM_WORLD);
 
     MPI_Recv(&number, 1, MPI_INT, 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
