@@ -45,17 +45,13 @@ int main(int argc, char** argv) {
   int number;
   if (world_rank == 0) {
     MPI_Barrier(MPI_COMM_WORLD);
-
-    // If we are rank 0, set the number to -1 and send it to process 1
+    
     number = -1;
 
     struct timeval tval_before, tval_after, tval_result;
-
     gettimeofday(&tval_before, NULL);
 
-    // Some code you want to time, for example:
-    MPI_Send(&number, 1, MPI_INT, 1, 0, MPI_COMM_WORLD);
-
+    MPI_Send(data, data_size, MPI_INT, 1, 0, MPI_COMM_WORLD);
     MPI_Recv(&number, 1, MPI_INT, 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
     gettimeofday(&tval_after, NULL);
@@ -63,12 +59,15 @@ int main(int argc, char** argv) {
 
     printf("Time elapsed: %ld.%06ld\n", (long int)tval_result.tv_sec, (long int)tval_result.tv_usec);
     printf("Process 0 received number %d from process 1\n", number);
+    printf("%f Mb/s", mega_bits_per_seconds(data_size));
 
 } else if (world_rank == 1) {
     MPI_Barrier(MPI_COMM_WORLD);
+    int received_data[data_size];
 
-    MPI_Recv(&number, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-    printf("Process 1 received number %d from process 0\n", number);
+    MPI_Recv(&received_data, data_size, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    printf("Process 1 received:\n");
+    print_table(received_data, data_size);
 
     MPI_Send(&number, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
 
