@@ -100,8 +100,7 @@ int main(int argc, char **argv)
     free(received_data);
     if (world_rank == 0)
     {
-      printf("data_size: %d B\n", data_size);
-      printf("average: %f Mb/s\n", average_speed);
+      printf("%d, %f", data_size, average_speed);
     }
   }
   MPI_Finalize();
