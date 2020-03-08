@@ -51,7 +51,7 @@ int main(int argc, char **argv)
   int number_of_attempts = 10000;
   double average_speed = 0.0;
   int j;
-  for (data_size = 1000; data_size < 10000; data_size += 1000)
+  for (data_size = 1000; data_size < 100000; data_size += 1000)
   {
     for (j = 0; j < number_of_attempts; j++)
     {
