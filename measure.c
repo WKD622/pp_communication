@@ -64,9 +64,9 @@ int main(int argc, char** argv) {
 
 } else if (world_rank == 1) {
     MPI_Barrier(MPI_COMM_WORLD);
-    int received_data[data_size];
+    int *received_data = malloc(data_size * sizeof(int));
     int response_number = 2;
-    MPI_Recv(&received_data, data_size, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    MPI_Recv(received_data, data_size, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
     printf("Process 1 received:\n");
     // print_table(received_data, data_size);
 
