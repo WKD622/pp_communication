@@ -28,6 +28,7 @@ int main(int argc, char** argv) {
   int data_size = 10;
   int data[data_size];
   initialize_table(data, data_size);
+  print_table(data, data_size)
 
   // We are assuming at least 2 processes for this task
   if (world_size < 2) {
