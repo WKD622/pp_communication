@@ -4,10 +4,10 @@
 #include <time.h>
 #include <sys/time.h>
 
-int initialize_table(&t, number_of_elements){
+void initialize_table(int *t,int number_of_elements){
   int i;
   for (i = 0; i < number_of_elements; i++){
-      t[i] = i
+      t[i] = i;
   }
 }
 
