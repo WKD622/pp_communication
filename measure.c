@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
   MPI_Comm_size(MPI_COMM_WORLD, &world_size);
 
   long int data_size = 100000;
-  int data[data_size];
+  int *data = malloc(data_size * sizeof(int));
   initialize_table(data, data_size);
 
   // We are assuming at least 2 processes for this task
