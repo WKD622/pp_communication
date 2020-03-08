@@ -46,7 +46,7 @@ int main(int argc, char **argv)
   int *data = malloc(data_size * sizeof(int));
   int *received_data = malloc(data_size * sizeof(int));
   initialize_table(data, data_size);
-  int number_of_attempts = 100;
+  int number_of_attempts = 10;
   double average_speed = 0.0;
   int j;
   for (j = 0; j < number_of_attempts; j++)
@@ -97,7 +97,7 @@ int main(int argc, char **argv)
   }
   free(data);
   free(received_data);
-    printf("average: %f\n", average_speed);
+  printf("average: %f\n", average_speed);
   MPI_Finalize();
   return 0;
 }
