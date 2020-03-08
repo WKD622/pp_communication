@@ -44,61 +44,65 @@ int main(int argc, char **argv)
   int world_size;
   MPI_Comm_size(MPI_COMM_WORLD, &world_size);
 
-  long int data_size = 1000000;
+  long int data_size = 1000;
   int *data = malloc(data_size * sizeof(int));
   int *received_data = malloc(data_size * sizeof(int));
   initialize_table(data, data_size);
-  int number_of_attempts = 1000;
+  int number_of_attempts = 10000;
   double average_speed = 0.0;
   int j;
-  for (j = 0; j < number_of_attempts; j++)
+  for (data_size = 1000; data_size < 10000; data_size + 1000)
   {
-    if (world_size < 2)
+    for (j = 0; j < number_of_attempts; j++)
     {
-      fprintf(stderr, "World size must be greater than 1 for %s\n", argv[0]);
-      MPI_Abort(MPI_COMM_WORLD, 1);
+      if (world_size < 2)
+      {
+        fprintf(stderr, "World size must be greater than 1 for %s\n", argv[0]);
+        MPI_Abort(MPI_COMM_WORLD, 1);
+      }
+      int number;
+      if (world_rank == 0)
+      {
+        MPI_Barrier(MPI_COMM_WORLD);
+
+        number = -1;
+
+        struct timeval tval_before, tval_after, tval_result;
+        gettimeofday(&tval_before, NULL);
+
+        MPI_Send(data, data_size, MPI_INT, 1, 0, MPI_COMM_WORLD);
+        MPI_Recv(&number, 1, MPI_INT, 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+
+        gettimeofday(&tval_after, NULL);
+        timersub(&tval_after, &tval_before, &tval_result);
+
+        long double time_passed_in_seconds = (long double)tval_result.tv_sec + (long double)tval_result.tv_usec / 1000000;
+        double speed = mega_bits_per_seconds(byte_to_mega_bits(data_size), time_passed_in_seconds);
+        if (j == 1)
+        {
+          average_speed = speed;
+        }
+        else
+        {
+          average_speed = average_speed - average_speed / (double)j;
+          average_speed = average_speed + speed / (double)j;
+        }
+      }
+      else if (world_rank == 1)
+      {
+        MPI_Barrier(MPI_COMM_WORLD);
+        int response_number = 2;
+        MPI_Recv(received_data, data_size, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        MPI_Send(&response_number, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
+      }
     }
-    int number;
+    free(data);
+    free(received_data);
     if (world_rank == 0)
     {
-      MPI_Barrier(MPI_COMM_WORLD);
-
-      number = -1;
-
-      struct timeval tval_before, tval_after, tval_result;
-      gettimeofday(&tval_before, NULL);
-
-      MPI_Send(data, data_size, MPI_INT, 1, 0, MPI_COMM_WORLD);
-      MPI_Recv(&number, 1, MPI_INT, 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-
-      gettimeofday(&tval_after, NULL);
-      timersub(&tval_after, &tval_before, &tval_result);
-
-      long double time_passed_in_seconds = (long double)tval_result.tv_sec + (long double)tval_result.tv_usec / 1000000;
-      double speed = mega_bits_per_seconds(byte_to_mega_bits(data_size), time_passed_in_seconds);
-      if (j == 1)
-      {
-        average_speed = speed;
-      }
-      else
-      {
-        average_speed = average_speed - average_speed / (double)j;
-        average_speed = average_speed + speed / (double)j;
-      }
+      printf("data_size: %f B\n", data_size);
+      printf("average: %f Mb/s\n", average_speed);
     }
-    else if (world_rank == 1)
-    {
-      MPI_Barrier(MPI_COMM_WORLD);
-      int response_number = 2;
-      MPI_Recv(received_data, data_size, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-      MPI_Send(&response_number, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
-    }
-  }
-  free(data);
-  free(received_data);
-  if (world_rank == 0)
-  {
-    printf("average: %f Mb/s\n", average_speed);
   }
   MPI_Finalize();
   return 0;
