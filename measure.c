@@ -76,7 +76,7 @@ int main(int argc, char **argv)
       if (j == 1)
       {
         average_speed = speed;
-        printf('average: %f', average_speed);
+        printf("average: %f", average_speed);
       }
       else
       {
