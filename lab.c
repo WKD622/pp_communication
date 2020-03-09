@@ -76,7 +76,6 @@ int main(int argc, char **argv)
     if (world_rank == 0)
     {
         rand_nums = create_rand_nums(3);
-        print_table(rand_nums, 3);
     }
 
     float *response = (float *)malloc(sizeof(float) * number_of_nodes);
