@@ -36,12 +36,12 @@ void print_table(int *t, int number_of_elements)
 float *create_rand_nums(int num_elements)
 {
     float *rand_nums = (float *)malloc(sizeof(float) * num_elements);
-    assert(rand_nums != NULL);
     int i;
     for (i = 0; i < num_elements; i++)
     {
         rand_nums[i] = 1.0;
     }
+    print_table(rand_nums, 3);
     return rand_nums;
 }
 
@@ -71,7 +71,7 @@ int main(int argc, char **argv)
     int world_size;
     MPI_Comm_size(MPI_COMM_WORLD, &world_size);
     int number_of_nodes = 3;
-    
+
     float *rand_nums = NULL;
     if (world_rank == 0)
     {
