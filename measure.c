@@ -70,7 +70,7 @@ int main(int argc, char **argv)
         struct timeval tval_before, tval_after, tval_result;
         gettimeofday(&tval_before, NULL);
 
-        MPI_Ssend(data, data_size, MPI_INT, 1, 0, MPI_COMM_WORLD);
+        MPI_Send(data, data_size, MPI_INT, 1, 0, MPI_COMM_WORLD);
         MPI_Recv(&number, 1, MPI_INT, 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
         gettimeofday(&tval_after, NULL);
@@ -93,7 +93,7 @@ int main(int argc, char **argv)
         MPI_Barrier(MPI_COMM_WORLD);
         int response_number = 2;
         MPI_Recv(received_data, data_size, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        MPI_Ssend(&response_number, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
+        MPI_Send(&response_number, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
       }
     }
     free(data);
