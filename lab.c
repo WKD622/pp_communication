@@ -84,7 +84,7 @@ int main(int argc, char **argv)
     MPI_Scatter(rand_nums, number_of_nodes, MPI_FLOAT, response,
                 number_of_nodes, MPI_FLOAT, 0, MPI_COMM_WORLD);
 
-    compute_multiply(sub_rand_nums, number_of_nodes, world_rank);
+    compute_multiply(response, number_of_nodes, world_rank);
 
     // Gather all partial averages down to all the processes
     // float *sub_avgs = (float *)malloc(sizeof(float) * world_size);
