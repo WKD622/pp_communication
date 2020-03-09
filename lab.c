@@ -19,7 +19,7 @@ void initialize_table(int *t, int number_of_elements)
     int i;
     for (i = 0; i < number_of_elements; i++)
     {
-        t[i] = 1;
+        t[i] = 1.0;
     }
 }
 
