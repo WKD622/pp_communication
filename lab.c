@@ -103,8 +103,6 @@ int main(int argc, char **argv)
     {
         free(rand_nums);
     }
-    free(sub_avgs);
-    free(sub_rand_nums);
 
     MPI_Barrier(MPI_COMM_WORLD);
     MPI_Finalize();
