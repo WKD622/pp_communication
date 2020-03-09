@@ -33,16 +33,14 @@ void print_table(int *t, int number_of_elements)
 }
 
 // Creates an array of random numbers. Each number has a value from 0 - 1
-float *create_rand_nums(int num_elements)
+float *create_array(float* array, int num_elements)
 {
-    float *rand_nums = (float *)malloc(sizeof(float) * num_elements);
     int i;
     for (i = 0; i < num_elements; i++)
     {
-        rand_nums[i] = 1.0;
+        array[i] = 1.0;
     }
     print_table(rand_nums, 3);
-    return rand_nums;
 }
 
 // Computes the average of an array of numbers
@@ -71,11 +69,12 @@ int main(int argc, char **argv)
     int world_size;
     MPI_Comm_size(MPI_COMM_WORLD, &world_size);
     int number_of_nodes = 3;
+    float *array = (float *)malloc(sizeof(float) * num_elements);
 
     float *rand_nums = NULL;
     if (world_rank == 0)
-    {
-        rand_nums = create_rand_nums(3);
+    {   
+        create_array(array, 3);
     }
 
     float *response = (float *)malloc(sizeof(float) * number_of_nodes);
