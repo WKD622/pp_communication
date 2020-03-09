@@ -32,17 +32,6 @@ void print_table(int *t, int number_of_elements)
     }
 }
 
-// Creates an array of random numbers. Each number has a value from 0 - 1
-float *create_array(float* array, int num_elements)
-{
-    int i;
-    for (i = 0; i < num_elements; i++)
-    {
-        array[i] = 1.0;
-    }
-    print_table(array, 3);
-}
-
 // Computes the average of an array of numbers
 void compute_multiply(float *array, int num_elements, int rank)
 {
@@ -74,7 +63,8 @@ int main(int argc, char **argv)
     float *rand_nums = NULL;
     if (world_rank == 0)
     {   
-        create_array(array, number_of_nodes);
+        initialize_table(array, number_of_nodes);
+        print_table(array, number_of_nodes);
     }
 
     float *response = (float *)malloc(sizeof(float) * number_of_nodes);
