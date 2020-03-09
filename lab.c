@@ -5,7 +5,7 @@
 // either provide a link to www.mpitutorial.com or keep this header intact.
 //
 // Program that computes the average of an array of elements in parallel using
-// MPI_Scatter and MPI_Allgather
+// MPI_Scatter and MPI_Gather
 //
 #include <stdio.h>
 #include <stdlib.h>
@@ -72,23 +72,32 @@ int main(int argc, char** argv) {
   // Compute the average of your subset
   float sub_avg = compute_avg(sub_rand_nums, num_elements_per_proc);
 
-  // Gather all partial averages down to all the processes
-  float *sub_avgs = (float *)malloc(sizeof(float) * world_size);
-  assert(sub_avgs != NULL);
-  MPI_Allgather(&sub_avg, 1, MPI_FLOAT, sub_avgs, 1, MPI_FLOAT, MPI_COMM_WORLD);
+  // Gather all partial averages down to the root process
+  float *sub_avgs = NULL;
+  if (world_rank == 0) {
+    sub_avgs = (float *)malloc(sizeof(float) * world_size);
+    assert(sub_avgs != NULL);
+  }
+  MPI_Gather(&sub_avg, 1, MPI_FLOAT, sub_avgs, 1, MPI_FLOAT, 0, MPI_COMM_WORLD);
 
-  // Now that we have all of the partial averages, compute the
+  // Now that we have all of the partial averages on the root, compute the
   // total average of all numbers. Since we are assuming each process computed
   // an average across an equal amount of elements, this computation will
   // produce the correct answer.
-  float avg = compute_avg(sub_avgs, world_size);
-  printf("Avg of all elements from proc %d is %f\n", world_rank, avg);
+  if (world_rank == 0) {
+    float avg = compute_avg(sub_avgs, world_size);
+    printf("Avg of all elements is %f\n", avg);
+    // Compute the average across the original data for comparison
+    float original_data_avg =
+      compute_avg(rand_nums, num_elements_per_proc * world_size);
+    printf("Avg computed across original data is %f\n", original_data_avg);
+  }
 
   // Clean up
   if (world_rank == 0) {
     free(rand_nums);
+    free(sub_avgs);
   }
-  free(sub_avgs);
   free(sub_rand_nums);
 
   MPI_Barrier(MPI_COMM_WORLD);
