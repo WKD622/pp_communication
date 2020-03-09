@@ -48,7 +48,6 @@ float *create_rand_nums(int num_elements)
 // Computes the average of an array of numbers
 void compute_multiply(float *array, int num_elements, int rank)
 {
-    float sum = 0.f;
     int i;
     for (i = 0; i < num_elements; i++)
     {
