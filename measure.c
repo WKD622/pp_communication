@@ -45,7 +45,7 @@ int main(int argc, char **argv)
   MPI_Comm_size(MPI_COMM_WORLD, &world_size);
   long int data_size;
 
-  for (data_size = 1000; data_size < 9400; data_size += 100)
+  for (data_size = 1000; data_size < 3500; data_size += 100)
   {
     int *data = malloc(data_size * sizeof(int));
     int *received_data = malloc(data_size * sizeof(int));
