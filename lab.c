@@ -80,7 +80,6 @@ int main(int argc, char **argv)
     }
 
     float *response = (float *)malloc(sizeof(float) * number_of_nodes);
-    assert(sub_rand_nums != NULL);
 
     MPI_Scatter(rand_nums, number_of_nodes, MPI_FLOAT, response,
                 number_of_nodes, MPI_FLOAT, 0, MPI_COMM_WORLD);
