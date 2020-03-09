@@ -59,8 +59,8 @@ int main(int argc, char **argv)
     MPI_Comm_size(MPI_COMM_WORLD, &world_size);
     int number_of_nodes = 3;
     float *array = malloc(sizeof(float) * number_of_nodes);
-
     float *rand_nums = NULL;
+    
     if (world_rank == 0)
     {   
         initialize_table(array, number_of_nodes);
