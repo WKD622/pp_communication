@@ -40,7 +40,7 @@ float *create_array(float* array, int num_elements)
     {
         array[i] = 1.0;
     }
-    print_table(rand_nums, 3);
+    print_table(array, 3);
 }
 
 // Computes the average of an array of numbers
